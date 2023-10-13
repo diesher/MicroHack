@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "spnClientId": {
+            "value": "111111-1111-1111-1111-111111"
+        },
+        "spnClientSecret": {
+            "value": "222222-2222-2222-2222-222222"
+        },
+        "spnTenantId": {
+            "value": "333333-3333-3333-3333-333333"
+        },
+        "AdminUsername": {
+            "value": "demouser"
+        },
+        "AdminPassword": {
+            "value": "demopass@123!#"
+        },
+        "deployBastion": {
+            "value": true
+        }
+    }
+}
