@@ -4,47 +4,36 @@
 
 The goal of this challenge is to explore the lab environment and understand the components and Azure resources that have been deployed.
 
-If you haven't deployed the lab environment yet, please follow this:
-- [Deploy to Azure (Bicep)](./resources/bicep/README.md)
-
 After completing this challenge, you have successfully deployed a couple of `Azure VM and arc-enabled servers` as a base for the upcoming challenges.
 
 ## **Actions**
 
-### Task 1: Deploy a Azure windows VM and a linux VM 
+### Task 1: Deploy the lab environment 
 
-Go to the Azure Portal and navigate to the resource group `rg-microhack-update-manager`. Look at the resources that have been deployed and think about possbile monitoring scenarios:
+If you haven't deployed the lab environment yet, please follow this:
+- [Deploy to Azure (Bicep)](./resources/bicep/README.md)
 
-- What kind of resources have been deployed (IaaS, PaaS)?
-- How would you monitor the resources?
-- What kind of logs and metrics have you in mind to monitor?
-- How do I get informed about downtime and failures?
+### Task 2: Explore Azure Update Manager
 
-### Task 2: Deploy the modified Jumpstart ArcBox
+- Once your deployment is finalized you can find the Update Management solution either in the **Updates** option of your VM blade or You can switch to Azute Update Manager service to explore the solution.
 
-Go to the Azure Portal and navigate to the resource group `rg-microhack-monitoring`. Look at the resources that have been deployed and think about possbile monitoring scenarios:
-
-- What kind of resources have been deployed (IaaS, PaaS)?
-- How would you monitor the resources?
-- What kind of logs and metrics have you in mind to monitor?
-- How do I get informed about downtime and failures?
-
+- Make use of the filters on the update manager page to drill down to the resource group you have just deployed.
 
 
 ### Learning Resources
 
-- [Overview of Log Analytics in Azure Monitor - Azure Monitor.](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview)
-- [Pricing - Azure Monitor | Microsoft Azure.](https://azure.microsoft.com/en-in/pricing/details/monitor/)
-- [Create a dashboard in the Azure Portal](https://learn.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboards)
-- [Share Azure dashboards by using Azure role-based access control](https://learn.microsoft.com/en-us/azure/azure-portal/azure-portal-dashboard-share-access)
-- [Create a workbook in Azure Monitor](https://learn.microsoft.com/en-us/azure/azure-monitor/visualize/workbooks-create-workbook)
+
+### Learning Resources
+
+- [Overview of Azure Update Manager](https://learn.microsoft.com/en-us/azure/update-center/overview?tabs=azure-vms)
 
 ## Success Criteria
 
-- Arc-enabled servers have been successfull onboarded
-- Azure VMs are up and running
+- The lab environment has been successfully deployed
+- From each VM you can access the **Updates** option under the VM blades
+- From the Azure Update Manager service page you set Filters to only show the scope of the lab resource group.
 
 
-### Congrats :partying_face:
+### Congratulations :
 
  Move on to [Challenge 1 : On-demand assessment and updates](01_challenge.md).
