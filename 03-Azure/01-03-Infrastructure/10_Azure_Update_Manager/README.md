@@ -67,15 +67,15 @@ Below an architecure diagram displays the setup. Tutorials and documentation tha
 
 ![Architecture](./img/LabEnvironment.png)
 
-### Deployment
-
-There are **two different ways** to deploy the lab environment. The first is using ARM via **Deploy to Azure-Button** and the second is to use the provided **terraform** scripts. The terraform method is the preferred method as it is faster and more reliable. However, if you are not familiar with terraform, you can use the Azure Portal method.
-
 #### Resources Deployment using Bicep
+
+The lab environment might take up to one hour to deploy. You might want to deploy it beforehand. 
 
 To deploy the lab environment using **Bicep**, click the link below.
 
 - [Deploy to Azure (Bicep)](./resources/bicep/README.md)
+
+Let's start with the challenges to master Azure Update Manager.
 
 ## **MicroHack Challenges**
 
@@ -98,11 +98,10 @@ To deploy the lab environment using **Bicep**, click the link below.
 - Walkthrough Challenge 5: **[Monitor and manage your machines and track update history at scale](walkthrough/challenge-5/solution.md)**
 - Walkthrough Challenge 6: **[Optional: Configure Update Manager with WSUS](walkthrough/challenge-6/solution.md)**
 
-# Challenge 3 : Schedule patching configuration on Azure VMs for Business continuity
 
 ## **Finished?**
 
-Congratulations! :partying_face: You finished the MicroHack for Azure Update Manager.
+Congratulations! : You finished the MicroHack for Azure Update Manager.
 
 We hope you've had the opportunity to experience Azure Update Manager features.
 
@@ -116,5 +115,5 @@ If you have used your own subscription to provision the lab, you can delete the 
 
 ## **Contributors**
 
-- [Herman Diessongo](https://www.linkedin.com/in/manuel-soelch)
+- [Herman Diessongo](https://www.linkedin.com/in/herman-diessongo-phd-399b5152)
 
