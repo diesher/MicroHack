@@ -1,13 +1,14 @@
-# Challenge 3 : Schedule patching configuration on Azure VMs for Business continuity
+# Challenge 3 : Enable automatic guest VM patching (Autopatch) on Azure VMs to ensure business continuity
 
 
-Create Availabity set
+### Task 1: create 2 VMs in a Availabity set
 
 Update Availabity set VM
 
 
 Create VMSS
 
-Update VMSS 
+Task 4: Automatic OS image upgrade for VMSS
+https://learn.microsoft.com/en-us/azure/update-center/updates-maintenance-schedules#automatic-os-image-upgrade
 
   

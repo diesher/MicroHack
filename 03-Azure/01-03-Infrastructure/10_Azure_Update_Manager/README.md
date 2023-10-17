@@ -22,18 +22,29 @@ In many cases, users might have existing on-premises solutions like System Cente
 
 Utilizing **Azure Update Manager**, you can centrally orchestrate the updating of operating systems, modify update configurations, and manage the deployment of necessary updates across your Windows and Linux Virtual Machines within Azure, as well as physical or VMs hosted in on-premises environments and other cloud platforms. 
 
-You can also use the Azure Update Manager's reporting features to quickly checkthe status of pending updates and manage their installation process for your machines. 
+You can also use the Azure Update Manager's reporting features to quickly check the status of pending updates and manage their installation process for your machines. 
 
-Azure Update Manager retains the core functionality found in the original version within Azure Automation, yet removes the reliance on Azure Automation and Azure Monitor Logs. It is engineered to:
-- leverage the latest advancements in Azure technology.
-- Provide a native update management capability for Azure virtual machines and arc-enabled servers.
-- Eliminate the need for initial onboarding steps.
-- Offer fine-grained role-based access control for enhanced security and management.
+The solution has made substantial improvement in addressing the limitations encountered with the automation update management:
+* The onboarding process, which used to be somewhat cumbersome, has undergone a substantial overhaul. Instead of relying on log analytics for storing patch data and state, the system now utilizes the Azure resource graph. This graph, well-known to those familiar with Azure, is a high-performance database that enables us to access and retrieve information about all our Azure resources efficiently. This transition eliminates the need for a dedicated log analytics workspace or an Azure automation account, making it an integral part of the Azure Fabric.
+
+* Furthermore, with the migration away from Azure automation, the hybrid runbook worker is no longer in use. Instead, the system has adopted an extension-based approach. While this offers flexibility, it necessitates specific requirements for interacting with non-Azure components. For Azure VMs, adding extensions is straightforward, given their integration into the Azure resource manager. These extensions are automatically added when the system requires patching, eliminating any need for proactive setup. However, for non-Azure resources, Arc enablement is now a prerequisite. It's worth noting that Arc enabled server OS is free and provides basic inventory information, control-level fabric details, SSH access, and extension support. This requirement streamlines the management process.
+
+* This transition brings significant benefits, especially in terms of scheduling. Users gain access to robust scheduling options, allowing them to plan activities such as post-Patch Tuesday updates with precision. 
+
+* The system also supports the creation of diverse machine groups based on various attributes, accommodating different environments and locations. 
+
+* Additionally, granular VM-level role-based access control (RBAC) capabilities ensure precise control over permissions.
+
+In summary, the system's transformation enhances its functionality and ease of use. The reliance on Azure's native capabilities, such as the resource graph and Arc enablement, simplifies operations while offering a wealth of features for managing updates effectively.
+
 
 The next diagram shows how the Update Manager checks for and installs updates on all Azure machines and Azure Arc-enabled servers, for both Windows and Linux.
 
 
 ![Architecture](./img/update-management-center-overview.png)
+
+
+**Azure Update Manager** is accessible in all Azure public regions where virtual machines are offered. However, for Azure Arc-enabled servers, support is currently limited to only the specified [regions](https://learn.microsoft.com/en-us/azure/update-center/support-matrix?tabs=azurearc%2Cazurevm-os#supported-regions). 
 
 
 ## **Objectives**
@@ -80,23 +91,23 @@ Let's start with the challenges to master Azure Update Manager.
 ## **MicroHack Challenges**
 
 - Challenge 0: **[Explore the lab environment](challenges/00_challenge.md)**
-- Challenge 1: **[On-demand assessment and updates](challenges/01_challenge.md)**
-- Challenge 2: **[Schedule updates and manage dynamic scope](challenges/02_challenge.md)**
-- Challenge 3: **[Schedule updates and manage dynamic scope](challenges/03_challenge.md)**
-- Challenge 4: **[Automate assessment and update at scale using Azure Policy](challenges/04_challenge.md)**
-- Challenge 5: **[Monitor and manage your machines and track update history at scale](challenges/05_challenge.md)**
-- Challenge 6: **[Optional: Configure Update Manager with WSUS](challenges/06_challenge.md)**
+- Challenge 1: **[Assess machines for missing updates](challenges/01_challenge.md)**
+- Challenge 2: **[Apply patches on your machines (scheduled and one-time updates)](challenges/02_challenge.md)**
+- Challenge 3: **[Schedule patching configuration on Azure VMs for Business continuity](challenges/03_challenge.md)**
+- Challenge 4: **[Monitor and manage your machines and track update history at scale](challenges/04_challenge.md)**
+- Challenge 5: **[Optional: Configure Update Manager with WSUS](challenges/05_challenge.md)**
+
 
 
 ## **Solution Guide**
 
 - Walkthrough Challenge 0: **[Install and Explore the lab environment](walkthrough/challenge-0/solution.md)**
-- Walkthrough Challenge 1: **[On-demand assessment and updates](walkthrough/challenge-1/solution.md)**
-- Walkthrough Challenge 2: **[Schedule updates and manage dynamic scope](walkthrough/challenge-2/solution.md)**
-- Walkthrough Challenge 3: **[Schedule updates and manage dynamic scope](walkthrough/challenge-3/solution.md)**
-- WalkthroughChallenge 4: **[Automate assessment and update at scale using Azure Policy](walkthrough/challenges-34/solution.md)**
-- Walkthrough Challenge 5: **[Monitor and manage your machines and track update history at scale](walkthrough/challenge-5/solution.md)**
-- Walkthrough Challenge 6: **[Optional: Configure Update Manager with WSUS](walkthrough/challenge-6/solution.md)**
+- Walkthrough Challenge 1: **[Assess machines for missing updates](walkthrough/challenge-1/solution.md)**
+- Walkthrough Challenge 2: **[Apply patches on your machines (scheduled and one-time updates)](walkthrough/challenge-2/solution.md)**
+- Walkthrough Challenge 3: **[Schedule patching configuration on Azure VMs for Business continuity](walkthrough/challenge-3/solution.md)**
+- WalkthroughChallenge 4: **[Monitor and manage your machines and track update history at scale](walkthrough/challenges-34/solution.md)**
+- Walkthrough Challenge 5: **[Optional: Configure Update Manager with WSUS](walkthrough/challenge-5/solution.md)**
+
 
 
 ## **Finished?**

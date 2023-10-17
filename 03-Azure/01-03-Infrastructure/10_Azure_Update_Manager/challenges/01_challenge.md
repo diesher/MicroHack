@@ -1,50 +1,39 @@
-# Challenge 1 - On-demand assessment and updates
+# Challenge 1 - Assess machines for missing updates
 
-For the patch management in Azure VM or non-Azure machine, **Azure Update Manager**, employs a new Azure extension, auto-installed during tasks like updates checks. It supports deployment to Azure VMs or Azure Arc-enabled servers, managed via Azure VM agents for Azure VMs, and Azure Arc-enabled servers agent for non-Azure machines. Update Manager handles extension agent setup and needs no manual intervention if agents are operational. The extension locally runs code to interact with the system, gathering update status, initiating approved update installations, and reporting data to Update Manager. This facilitates analysis with Azure Resource Graph, enabling efficient management of your machines either directly or at scale.
+Let's delve into the inner workings of the assessment process in the context of enabling large-scale, controlled patching. To initiate patching, the first step is running an assessment. This assessment is vital as it tells us which patches are installed and which are missing. On Windows, Azure update manager uses the Windows Update Agent, while on Linux, we employ OVAL-compatible tools for assessing missing patches. OVAL definitions can be fetched from a local or remote repository.
 
-**Azure Update Manager** is accessible in all Azure public regions where virtual machines are offered. However, for Azure Arc-enabled servers, support is currently limited to only the specified [regions](https://learn.microsoft.com/en-us/azure/update-center/support-matrix?tabs=azurearc%2Cazurevm-os#supported-regions). 
+To ensure continuous assessment, you can establish a periodic assessment, often set at every 24 hours, for both Azure and Arc-enabled server operating systems.
+Alternatively, we can trigger assessments by assigning policies through Azure Policy, particularly beneficial for managing numerous systems. We also have the option to perform on-demand assessments, manually checking up to 100 machines for immediate updates using local tools.
+
+Once assessments conclude, we gain access to detailed reporting, offering insights into patch statuses. This reporting extends to both the assessment phase and patch execution, providing transparency into patch management and informed decision-making for your systems.
 
 
 ## **Goal**
 
-The goal of the first exercise is to Take immediate control of your updates by manually checking, installing updates and changing settings like periodic assessment, patch orchestration options.
+The goal of the first challenge is to take immediate control of your updates by assessing the availability of updates and gain transparency about available patches through the reporting. 
 
-After the challenge you should to be able to perform assessment and updates on demand on your machines. 
-
-> **Warning**
-> 
-> Please note that enabling periodic assessments for Arc-enabled machines that Defender for Servers Plan 2 is not enabled on their subscription or Connector, is subject to Azure Update Manager pricing. Arc-Enabled machines that Defender for Servers Plan 2 is enabled on their related Subscription or Connector, or any Azure VN, are eligible for periodic assessments with no additional cost
-> 
+After the challenge you should to be able to perform on-demand assessment and periodic assessment on your machines. 
 
 
 ## Actions
 Please perform these tasks to complete challenge 1: 
 
-### Task 1: Check for updates on a single Azure VM
+### Task 1: Configure periodic assessment and patch orchestration using update settings
+Your task is to configure and enable periodic assessment for both an Azure Virtual Machine (VM) and an Arc-Enabled Server. Periodic assessment ensures that your systems stay up-to-date with the latest updates and compliance status. Additionally, you will check Azure Update Manager reporting (overview) to see which recommended updates are available for your machines. 
 
-Update Manager enables you to inspect your machines for the latest updates whenever needed, on-demand. You can observe the recent update status and respond accordingly. Verify if an update is available for one of your Azure VM. 
+> **Note** : Patch orchestration is not applicable to Arc-enabled servers. To schedule updates on Azure machines, please change patch orchestration to "Customer Managed Schedules". This will set Patch mode to "AutomaticByPlatform" and BypassPlatformSafetyChecksOnUserSchedule to "true", which will ensure machines are patched using your configured schedules and are not autopatched. For Hotpatch compatible machines, the patch orchestration "Customer Managed Schedules" is only allowed when Hotpatch is disabled. [Learn more](https://learn.microsoft.com/en-us/azure/update-center/prerequsite-for-schedule-patching?tabs=new-prereq-portal%2Cauto-portal&WT.mc_id=Portal-Microsoft_Azure_Automation)
 
-### Task 2: Check for updates on an Arc-enabled server
+### Task 2: Check for updates on a single Azure VM (On-demand assessment)
 
-Update Manager enables you to inspect your machines for the latest updates whenever needed, on-demand. You can observe the recent update status and respond accordingly. Verify if an update is available for one of your Arc-enabled server.
-
-### Task 3: Install updates on by machine
-Update Manager allows you to secure your machines immediately by installing updates on demand. Install one-time update for one of your machines.
-
-### Task 4: Configure periodic assessment and patch orchestration using update settings
-
-`Periodic assessment` is a feature enabling automatic update checks by Update Manager. Activating this on your machines allows for daily update retrievals and viewing of the current compliance status of your machines. 
-
-`Patch Orchestration` provides the following options:
-* **Customer Managed Schedules**: It allows to schedule and customize patch deployments according to user perferences using maintenance configuration.
-* **Azure Managed - Safe Deployment**: It allows to orchestrate patches across availability sets, with Azure safety checks.
-* **Windows automatic updates**: It is best for scenarios where interrupting workloads for patching isn't an issue.
-* **Manual updates**: This allows you to turns off Windows Automatic Updates and install patches or pick a different solution (e.g. SCCM)
-**Image default**: it uses thew default patching configuration in the image used to create the VM.
+You have the option to trigger a software updates compliance scan on a machine to obtain an up-to-date inventory of available operating system updates. Now your task is to perform a check for available updates for an single server (Do this on both an Azure Virtual Machine (VM) and an Arc-Enabled Server). This will involve verifying the update status, types of updates, and their installation readiness. 
 
 
-Use the update setting to perform periodic assessment and orchestrates patches for one or two VMs.
-
+### Task 3: Assign built-in policies for regularly checking updates at scale
+For this, you will enable Periodic Assessment for machines in your resource group at scale using Azure Policy. As explained before Periodic Assessment simplifies the process of checking for available updates and ensures that your machines stay up-to-date without manual intervention. To complete this task you will need to:
+- Enable Periodic Assessment for your Azure machines by using Azure Policy
+- Enable Periodic Assessment for your Azure Arc-enabled machines by using Azure Policy
+- Monitor if Periodic Assessment is enabled for your machines
+- monitor compliance of resources and remediation status
 
 
 ### Learning Resources
@@ -52,16 +41,18 @@ Use the update setting to perform periodic assessment and orchestrates patches f
 - [Overview of Azure Update Manager](https://learn.microsoft.com/en-us/azure/update-center/overview?tabs=azure-vms)
 - [Support matrix for Azure Update Manager](https://learn.microsoft.com/en-us/azure/update-center/support-matrix?tabs=azurevm%2Cazurevm-os)
 - [Assessment options in Update Manager](https://learn.microsoft.com/en-us/azure/update-center/assessment-options)
-- [Update options in Azure Update Manager](https://learn.microsoft.com/en-us/azure/update-center/updates-maintenance-schedules)
+- [Automate assessment at scale by using Azure Policy](https://learn.microsoft.com/en-us/azure/update-center/periodic-assessment-at-scale)
+
 
 ## Success Criteria
 
-- one of the Azure VM is up-to-date  
-- One of the Arc-enable is up-to-date 
+- Periodic assessment is configure for an Azure VM and an Arc-enabled Server
+- On-demand assessment has been done for the remaining VMs
+- An Azure Policy is configure to performed periodic assessment at the scope of the resource group.
 
 ### Congrats :partying_face:
 
- Move on to [Challenge 2 : Schedule updates and manage dynamic scope](02_challenge.md).
+ Move on to [Apply patches on your machines (scheduled and one-time updates)](02_challenge.md).
 
  ### Solution - Spoilerwarning
 
